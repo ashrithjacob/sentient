@@ -25,7 +25,13 @@ if not os.path.exists(UPLOAD_FOLDER):
 
 
 @app.route('/query-memory', methods=['GET'])
-def chat_with_memories(query: str, user_id: str = "default_user") -> str:
+def chat_with_memories():
+    query = request.args.get('query')
+    user_id = request.args.get('user_id', "default_user")
+    
+    if not query:
+        return jsonify({'error': 'Query parameter is required'}), 400
+    
     # Retrieve relevant memories
     relevant_memories = mem0.search(query=query, user_id=user_id)
     memories_str = "\n".join(f"- {entry['memory']}" for entry in relevant_memories)
