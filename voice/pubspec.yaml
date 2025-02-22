@@ -38,6 +38,7 @@ dependencies:
   record: ^5.0.4
   permission_handler: ^11.3.1
   path_provider: ^2.1.5
+  path: ^1.9.0
 
 
 dev_dependencies:
