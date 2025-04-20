@@ -10,6 +10,10 @@ import 'package:record/record.dart';
 import 'custom_recording_button.dart';
 import 'custom_recording_wave_widget.dart';
 
+//String host = "192.168.29.157";
+String port = "80";
+String host = "https://chatbot-flutter.replit.app";
+
 class RecordingScreen extends StatefulWidget {
   const RecordingScreen({super.key});
 
@@ -113,7 +117,7 @@ class _RecordingScreenState extends State<RecordingScreen> {
     });
 
     try {
-      final uri = Uri.parse('http://192.168.29.157:5000/upload-audio');
+      final uri = Uri.parse('$host/upload-audio');
 
       final request = http.MultipartRequest('POST', uri);
       final file = await http.MultipartFile.fromPath(
@@ -211,7 +215,7 @@ class _RecordingScreenState extends State<RecordingScreen> {
     try {
       debugPrint('=========>>>>>> SENDING MESSAGE: $message <<<<<<===========');
       final response = await http.get(
-        Uri.parse('http://192.168.29.157:5000/query-memory').replace(
+        Uri.parse('$host/query-memory').replace(
           queryParameters: {
             'query': message,
             'user_id': 'default_user',
